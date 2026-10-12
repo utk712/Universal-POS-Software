@@ -141,6 +141,13 @@ exports.checkoutOrder = (req, res) => {
               "UPDATE products SET stock_quantity = MAX(0, stock_quantity - ?) WHERE product_id = ?",
               [item.quantity, item.product_id]
             );
+
+            // Record immutable double-entry stock audit ledger delta
+            db.run(
+              `INSERT INTO stock_audit_ledger (product_id, sku_code, product_name, change_type, qty_delta, authorized_by, reference_id) 
+               VALUES (?, ?, ?, 'SALE', ?, ?, ?)`,
+              [item.product_id, item.hsn_code || '', item.product_name, -item.quantity, cleanCounterCode, invoiceNo]
+            );
           }
 
           // Deduct variant stock if applicable

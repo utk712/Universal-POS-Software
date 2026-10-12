@@ -467,5 +467,57 @@ db.serialize(() => {
     date_time DATETIME DEFAULT CURRENT_TIMESTAMP
   )`);
 
-  console.log("Pharmacy & Multi-Vertical Database Schema Initialized Successfully ✅");
+  // 21. Immutable Double-Entry Stock Audit Ledger
+  db.run(`CREATE TABLE IF NOT EXISTS stock_audit_ledger (
+    ledger_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    product_id INTEGER,
+    sku_code TEXT,
+    product_name TEXT,
+    change_type TEXT, -- 'SALE', 'PURCHASE', 'STOCK_ADJUSTMENT', 'RETURN', 'DAMAGE'
+    qty_delta REAL,
+    authorized_by TEXT DEFAULT 'SYSTEM',
+    reference_id TEXT DEFAULT '',
+    date_time DATETIME DEFAULT CURRENT_TIMESTAMP
+  )`);
+
+  // 22. Automobile Workshop Digital Job Cards
+  db.run(`CREATE TABLE IF NOT EXISTS automobile_job_cards (
+    job_card_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    job_card_no TEXT UNIQUE,
+    vehicle_registration TEXT,
+    vehicle_model TEXT,
+    customer_name TEXT,
+    customer_mobile TEXT,
+    job_status TEXT DEFAULT 'INTAKE', -- 'INTAKE', 'IN_PROGRESS', 'QUALITY_CHECK', 'BILLED'
+    assigned_mechanic TEXT DEFAULT '',
+    estimated_cost REAL DEFAULT 0,
+    parts_issued_json TEXT DEFAULT '[]',
+    notes TEXT DEFAULT '',
+    date_time DATETIME DEFAULT CURRENT_TIMESTAMP
+  )`);
+
+  // 23. Salon Staff Provider Service Commissions
+  db.run(`CREATE TABLE IF NOT EXISTS provider_commissions (
+    commission_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    order_id INTEGER,
+    invoice_no TEXT,
+    staff_id INTEGER,
+    staff_name TEXT,
+    service_name TEXT,
+    service_amount REAL,
+    commission_rate REAL DEFAULT 10,
+    calculated_amount REAL,
+    date_time DATETIME DEFAULT CURRENT_TIMESTAMP
+  )`);
+
+  // 24. Restaurant Recipe Raw Material Consumption Map (BOM)
+  db.run(`CREATE TABLE IF NOT EXISTS recipe_consumption_map (
+    map_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    menu_product_id INTEGER,
+    raw_material_product_id INTEGER,
+    qty_grams REAL,
+    date_time DATETIME DEFAULT CURRENT_TIMESTAMP
+  )`);
+
+  console.log("Enterprise Multi-Vertical Database Schema Initialized Successfully ✅");
 });

@@ -290,6 +290,28 @@ export default function Sales() {
 
     const query = search.trim().toLowerCase();
 
+    // 0. 🔥 GS1 Electronic Weigh-Scale Barcode Parser (Prefix 29, 13 Digits)
+    if (query.startsWith("29") && query.length === 13) {
+      const scaleSku = query.substring(2, 7); // 5-digit item SKU
+      const scaleGrams = parseInt(query.substring(7, 12), 10) || 0; // 5-digit weight in grams
+      const parsedWeightKg = Number((scaleGrams / 1000).toFixed(3)); // Convert to kg (e.g. 01250 -> 1.250 kg)
+
+      const matchedScaleProd = products.find(
+        (p) =>
+          (p.barcode && (p.barcode.toLowerCase() === scaleSku || p.barcode === query)) ||
+          (p.hsn_code && p.hsn_code === scaleSku) ||
+          (p.product_id && p.product_id.toString() === scaleSku)
+      );
+
+      if (matchedScaleProd) {
+        addToCart(matchedScaleProd, parsedWeightKg);
+        setSearch("");
+        setMessage(`⚖️ Weigh-Scale Item Added: "${matchedScaleProd.name}" (${parsedWeightKg} kg) ✅`);
+        setTimeout(() => setMessage(""), 3500);
+        return;
+      }
+    }
+
     // 1. Exact Barcode Match
     const matchedBarcode = products.find(
       (p) => p.barcode && p.barcode.toLowerCase() === query
@@ -329,14 +351,15 @@ export default function Sales() {
     }
   };
 
-  const addToCart = (product) => {
+  const addToCart = (product, customQty = 1) => {
+    const addQty = Number(customQty) || 1;
     const existingIndex = product.product_id 
       ? cart.findIndex((i) => i.product_id === product.product_id)
       : -1;
     if (existingIndex > -1) {
       const newCart = [...cart];
-      newCart[existingIndex].quantity += 1;
-      newCart[existingIndex].subtotal = newCart[existingIndex].quantity * newCart[existingIndex].selling_price;
+      newCart[existingIndex].quantity = Number((newCart[existingIndex].quantity + addQty).toFixed(3));
+      newCart[existingIndex].subtotal = Number((newCart[existingIndex].quantity * newCart[existingIndex].selling_price).toFixed(2));
       setCart(newCart);
     } else {
       const price = Number(product.selling_price || product.mrp || product.price_full || 0);
@@ -362,6 +385,7 @@ export default function Sales() {
           product_id: product.product_id,
           name: product.name + (storeInfo.active_vertical === "apparel" && selectedSize ? ` (${selectedSize})` : ""),
           barcode: product.barcode,
+          category: product.category || "General",
           hsn_code: product.hsn_code || (storeInfo.active_vertical === "pharmacy" ? "3004" : storeInfo.active_vertical === "liquor" ? "2208" : "1905"),
           batch_no: product.batch_no || "",
           expiry_date: product.expiry_date || "",
@@ -382,8 +406,8 @@ export default function Sales() {
           mrp,
           selling_price: price,
           tax_rate: product.tax_rate || 0,
-          quantity: 1,
-          subtotal: price
+          quantity: addQty,
+          subtotal: Number((price * addQty).toFixed(2))
         }
       ]);
     }
@@ -1296,8 +1320,13 @@ export default function Sales() {
                 }}
               >
                 <div style={{ flex: 1, paddingRight: "10px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px", flexWrap: "wrap" }}>
                     <span style={{ fontWeight: "700", fontSize: "13px", color: "var(--text-dark)" }}>{item.name}</span>
+                    {item.category && (
+                      <span style={{ background: "#e0f2fe", color: "#0369a1", fontSize: "10px", fontWeight: "700", padding: "1px 6px", borderRadius: "4px" }} title="Anti-Shoplifting Verification Tag">
+                        🏷️ {item.category}
+                      </span>
+                    )}
                     {item.is_rx === 1 && (
                       <span style={{ background: "#fee2e2", color: "#b91c1c", fontSize: "10px", fontWeight: "800", padding: "1px 4px", borderRadius: "4px" }}>Rx</span>
                     )}
