@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VyaparFlow POS & ERP - Animated Executive Pitch Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #F8F6F0;
+      --bg-cream-alt: #F1EEE6;
+      --card-bg: #FFFFFF;
+      --border-subtle: #E2E8F0;
+      --border-hover: #CBD5E1;
+      --text-dark: #0F172A;
+      --text-muted: #64748B;
+      --primary-blue: #1E3A8A;
+      --primary-blue-light: #EFF6FF;
+      --accent-emerald: #059669;
+      --accent-emerald-light: #ECFDF5;
+      --accent-amber: #D97706;
+      --accent-amber-light: #FFFBEB;
+      --accent-rose: #E11D48;
+      --accent-rose-light: #FFE4E6;
+      --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 16px 36px -8px rgba(15, 23, 42, 0.09);
+      --shadow-glow: 0 0 25px rgba(5, 150, 105, 0.25);
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+
+    /* Top Animated Reading / Slide Progress Bar */
+    .slide-progress-track {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(226, 232, 240, 0.6);
+      z-index: 200;
+    }
+
+    .slide-progress-bar {
+      height: 100%;
+      width: 10%;
+      background: linear-gradient(90deg, #1E3A8A, #059669, #10B981);
+      transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 8px rgba(5, 150, 105, 0.5);
+    }
+
+    /* Navbar */
+    .deck-navbar {
+      background: rgba(248, 246, 240, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 12px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 150;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    }
+
+    .deck-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, #1E3A8A, #059669);
+      color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+      box-shadow: 0 4px 14px rgba(30, 58, 138, 0.28);
+      animation: pulseBrand 3s infinite ease-in-out;
+    }
+
+    @keyframes pulseBrand {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .brand-name {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text-dark);
+    }
+
+    .brand-badge {
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--accent-emerald-light);
+      color: var(--accent-emerald);
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid #A7F3D0;
+    }
+
+    .deck-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-nav {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      padding: 8px 14px;
+      border-radius: 9px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-dark);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .btn-nav:hover {
+      border-color: var(--primary-blue);
+      background: var(--primary-blue-light);
+      color: var(--primary-blue);
+      transform: translateY(-1px);
+    }
+
+    .btn-nav:active {
+      transform: translateY(1px);
+    }
+
+    .btn-nav.active {
+      background: #059669;
+      color: white;
+      border-color: #059669;
+    }
+
+    .slide-indicator {
+      font-size: 13px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: var(--text-dark);
+      padding: 0 10px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Main Container & Slide Layout */
+    .deck-container {
+      flex: 1;
+      max-width: 1260px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 30px 24px 60px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      perspective: 1200px;
+    }
+
+    .slide {
+      display: none;
+      opacity: 0;
+      transform: scale(0.98) translateY(12px);
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .slide.active {
+      display: block;
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    /* Animated Stagger for Inner Cards */
+    .slide.active .card:nth-child(1) { animation: cardStagger 0.5s 0.08s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .slide.active .card:nth-child(2) { animation: cardStagger 0.5s 0.16s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .slide.active .card:nth-child(3) { animation: cardStagger 0.5s 0.24s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .slide.active .card:nth-child(4) { animation: cardStagger 0.5s 0.32s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .slide.active .metric-box:nth-child(1) { animation: cardStagger 0.5s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .slide.active .metric-box:nth-child(2) { animation: cardStagger 0.5s 0.18s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .slide.active .metric-box:nth-child(3) { animation: cardStagger 0.5s 0.26s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .slide.active .metric-box:nth-child(4) { animation: cardStagger 0.5s 0.34s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+    @keyframes cardStagger {
+      0% {
+        opacity: 0;
+        transform: translateY(18px) scale(0.97);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Slide Headers */
+    .slide-eyebrow {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent-emerald);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .slide-eyebrow span {
+      display: inline-block;
+      animation: floatBadge 2s infinite ease-in-out;
+    }
+
+    @keyframes floatBadge {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    .slide-title {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      line-height: 1.25;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+
+    .slide-subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 950px;
+      margin-bottom: 28px;
+    }
+
+    /* Grids & Cards */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 26px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: #CBD5E1;
+      transform: translateY(-4px);
+    }
+
+    .card.highlight {
+      border: 2px solid var(--primary-blue);
+      background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+    }
+
+    .card.emerald-highlight {
+      border: 2px solid var(--accent-emerald);
+      background: linear-gradient(180deg, #FFFFFF 0%, #F0FDF4 100%);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--primary-blue-light);
+      color: var(--primary-blue);
+      border: 1px solid #BFDBFE;
+    }
+
+    .card-badge.emerald {
+      background: var(--accent-emerald-light);
+      color: var(--accent-emerald);
+      border-color: #A7F3D0;
+    }
+
+    .card-badge.amber {
+      background: var(--accent-amber-light);
+      color: var(--accent-amber);
+      border-color: #FDE68A;
+    }
+
+    .card-badge.rose {
+      background: var(--accent-rose-light);
+      color: var(--accent-rose);
+      border-color: #FECDD3;
+    }
+
+    .card-icon {
+      font-size: 30px;
+      margin-bottom: 14px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.15) rotate(4deg);
+    }
+
+    .card-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .card-list {
+      list-style: none;
+      margin-top: 14px;
+    }
+
+    .card-list li {
+      font-size: 13.5px;
+      color: var(--text-dark);
+      padding: 6px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      border-bottom: 1px dashed #F1F5F9;
+    }
+
+    .card-list li:last-child {
+      border-bottom: none;
+    }
+
+    /* Metric Boxes & Animated Numbers */
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .metric-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+    }
+
+    .metric-box:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .metric-value {
+      font-size: 30px;
+      font-weight: 800;
+      color: var(--primary-blue);
+      font-family: var(--font-mono);
+      margin-bottom: 4px;
+    }
+
+    .metric-value.emerald {
+      color: var(--accent-emerald);
+    }
+
+    .metric-value.amber {
+      color: var(--accent-amber);
+    }
+
+    .metric-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Live Pulsing Heartbeat Radar */
+    .radar-container {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      margin-right: 6px;
+    }
+
+    .radar-dot {
+      width: 10px;
+      height: 10px;
+      background-color: #10B981;
+      border-radius: 50%;
+      z-index: 2;
+    }
+
+    .radar-wave {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.4);
+      animation: radarPing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes radarPing {
+      75%, 100% {
+        transform: scale(2.4);
+        opacity: 0;
+      }
+    }
+
+    /* Interactive Vertical Engine Morphing Selector */
+    .vertical-tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .vertical-tab-btn {
+      padding: 10px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background: var(--card-bg);
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      color: var(--text-dark);
+    }
+
+    .vertical-tab-btn:hover {
+      border-color: var(--primary-blue);
+      background: var(--primary-blue-light);
+    }
+
+    .vertical-tab-btn.active {
+      background: var(--primary-blue);
+      color: white;
+      border-color: var(--primary-blue);
+      box-shadow: 0 4px 14px rgba(30, 58, 138, 0.3);
+    }
+
+    .vertical-preview-card {
+      background: #0F172A;
+      color: #F8FAFC;
+      border-radius: 18px;
+      padding: 24px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      box-shadow: var(--shadow-md);
+      transition: all 0.35s ease;
+    }
+
+    /* Presenter Notes Overlay */
+    .notes-drawer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.95);
+      color: #F8FAFC;
+      backdrop-filter: blur(12px);
+      padding: 18px 32px;
+      border-top: 2px solid var(--accent-emerald);
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 300;
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.3);
+    }
+
+    .notes-drawer.open {
+      transform: translateY(0);
+    }
+
+    .notes-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .notes-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #34D399;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .notes-content {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #E2E8F0;
+    }
+
+    /* Slide Thumbnails Drawer */
+    .grid-drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 400;
+      display: none;
+      padding: 60px 40px;
+      overflow-y: auto;
+    }
+
+    .grid-drawer.open {
+      display: block;
+      animation: fadeInGrid 0.25s ease;
+    }
+
+    @keyframes fadeInGrid {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .grid-drawer-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      background: #334155;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .thumbnails-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      max-width: 1200px;
+      margin: 30px auto;
+    }
+
+    .thumb-item {
+      background: #1E293B;
+      border: 2px solid #334155;
+      border-radius: 12px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: white;
+    }
+
+    .thumb-item:hover, .thumb-item.active {
+      border-color: #10B981;
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    .thumb-num {
+      font-size: 11px;
+      font-weight: 800;
+      color: #10B981;
+      margin-bottom: 6px;
+    }
+
+    .thumb-title {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    /* Footer Hint */
+    .deck-footer-hint {
+      margin-top: auto;
+      padding: 16px;
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-cream-alt);
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .key-badge {
+      background: white;
+      border: 1px solid #CBD5E1;
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-dark);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .metric-row { grid-template-columns: 1fr 1fr; }
+      .slide-title { font-size: 26px; }
+      .thumbnails-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Slide Progress Bar -->
+  <div class="slide-progress-track">
+    <div class="slide-progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Top Global Header -->
+  <header class="deck-navbar">
+    <div class="deck-brand" onclick="goToSlide(1)">
+      <div class="brand-icon">⚡</div>
+      <div>
+        <div class="brand-name">VyaparFlow POS & ERP</div>
+      </div>
+      <span class="brand-badge">Production v1.0.0</span>
+    </div>
+
+    <div class="deck-controls">
+      <button class="btn-nav" id="soundBtn" onclick="toggleSound()" title="Toggle Sound FX">
+        🔊 Sound: <span id="soundStatus">On</span>
+      </button>
+
+      <button class="btn-nav" id="notesBtn" onclick="toggleNotes()" title="Toggle Pitch Script (Key: N)">
+        🎙️ Script [N]
+      </button>
+
+      <button class="btn-nav" id="gridBtn" onclick="toggleGrid()" title="All Slides Grid (Key: G)">
+        📑 Grid [G]
+      </button>
+
+      <button class="btn-nav" id="autoplayBtn" onclick="toggleAutoPlay()" title="Toggle Auto Slideshow (Key: A)">
+        ▶ Auto Play [A]
+      </button>
+
+      <button class="btn-nav" onclick="prevSlide()" title="Previous Slide (←)">
+        ← Prev
+      </button>
+
+      <span class="slide-indicator" id="slideNum">01 / 10</span>
+
+      <button class="btn-nav" onclick="nextSlide()" title="Next Slide (→ / Space)">
+        Next →
+      </button>
+
+      <button class="btn-nav" onclick="toggleFullScreen()" title="Fullscreen (F)">
+        ⛶ Fullscreen [F]
+      </button>
+    </div>
+  </header>
+
+  <!-- Slide Canvas -->
+  <main class="deck-container">
+
+    <!-- SLIDE 1: COVER & VISION -->
+    <section class="slide active" data-slide="1" data-notes="Bhaiya, I want to present VyaparFlow POS & ERP — an offline-first, high-throughput retail operating system built specifically for 3.5 Crore Indian retailers. It has already been engineered, tested, and packaged into an 86 MB factory-clean Windows installer.">
+      <div class="slide-eyebrow"><span>⚡</span> Executive Pitch Deck | Mentor Edition</div>
+      <h1 class="slide-title">VyaparFlow POS & ERP: Next-Generation Retail Operating System</h1>
+      <p class="slide-subtitle">A lightning-fast, offline-first, multi-counter commerce and compliance engine engineered for India's 3.5 Crore brick-and-mortar merchants.</p>
+
+      <div class="grid-3">
+        <div class="card highlight">
+          <span class="card-badge emerald">0ms Latency</span>
+          <div class="card-icon">⚡</div>
+          <h3 class="card-title">Offline-First Engine</h3>
+          <p class="card-desc">Zero reliance on cloud internet for checkout. Barcode scans, thermal printing, and multi-counter LAN sync happen in milliseconds.</p>
+        </div>
+
+        <div class="card highlight">
+          <span class="card-badge">Zero Config</span>
+          <div class="card-icon">🔄</div>
+          <h3 class="card-title">8-in-1 Vertical Morphing</h3>
+          <p class="card-desc">Adapts seamlessly to Supermarkets, Wine/Liquor stores, Pharmacies, Restaurants, Apparel, and Electronics with dynamic unit mechanics.</p>
+        </div>
+
+        <div class="card highlight">
+          <span class="card-badge amber">Zero Audit Fines</span>
+          <div class="card-icon">🛡️</div>
+          <h3 class="card-title">Statutory Legal Guard</h3>
+          <p class="card-desc">Built-in Section 269ST cash blocker, Rule 46 CGST/SGST itemized tax breakdown, and 1-click Tally Prime XML synchronization.</p>
+        </div>
+      </div>
+
+      <div class="metric-row">
+        <div class="metric-box">
+          <div class="metric-value" data-count="3.5" data-suffix=" Cr">0</div>
+          <div class="metric-label">Target Merchants in India</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-value emerald" data-count="86.37" data-suffix=" MB">0</div>
+          <div class="metric-label">Standalone Installer Size</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-value" data-count="100" data-suffix="%">0</div>
+          <div class="metric-label">Offline Billing Reliability</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-value amber" data-count="0" data-suffix=" sec">0</div>
+          <div class="metric-label">Billing Downtime on Outage</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: THE PROBLEM -->
+    <section class="slide" data-slide="2" data-notes="Currently, shopkeepers are trapped between ancient 1990s desktop ERPs like Tally/Marg that take months to learn and have no theft protection, and fragile cloud apps that freeze when internet drops in basement stores. Furthermore, owners risk 100% tax penalties under Section 269ST without even knowing it.">
+      <div class="slide-eyebrow"><span>⚠️</span> 01 | The Industry Bottleneck</div>
+      <h2 class="slide-title">The Painful Reality Facing 3.5 Crore Indian Retailers</h2>
+      <p class="slide-subtitle">Merchants are caught in an operational dilemma between fragile cloud apps and 25-year-old legacy software.</p>
+
+      <div class="grid-3">
+        <div class="card">
+          <span class="card-badge rose">1990s Architecture</span>
+          <div class="card-icon">💾</div>
+          <h3 class="card-title">1. Outdated Desktop ERPs (Tally, Busy, Marg)</h3>
+          <p class="card-desc">
+            Extremely complex keyboard-only UIs requiring months of accountant training. Cashiers make frequent billing errors, and software crashes during power surges.
+          </p>
+          <ul class="card-list">
+            <li>❌ High staff training turnaround</li>
+            <li>❌ Zero real-time remote cashier supervision</li>
+            <li>❌ No built-in thermal spooling</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="card-badge rose">Fragile Connectivity</span>
+          <div class="card-icon">☁️</div>
+          <h3 class="card-title">2. Modern Cloud Mobile Apps (Vyapar, Khatabook)</h3>
+          <p class="card-desc">
+            Depend heavily on 4G/5G connections. When the internet fluctuates in basement shops or peak market hours, billing freezes, creating long customer queues.
+          </p>
+          <ul class="card-list">
+            <li>❌ Infinite loading spinners during rush hours</li>
+            <li>❌ Lack true multi-counter LAN master-slave sync</li>
+            <li>❌ Resented monthly SaaS subscription rent</li>
+          </ul>
+        </div>
+
+        <div class="card highlight">
+          <span class="card-badge amber">Severe Legal Fines</span>
+          <div class="card-icon">🚨</div>
+          <h3 class="card-title">3. The Fatal Hidden Bleed: Theft & Tax Penalties</h3>
+          <p class="card-desc">
+            Store owners suffer 2-5% cash shrinkage from counter pilferage, and unknowingly accept &gt;₹2 Lakh in cash, triggering 100% penalties under <strong>Income Tax Section 271DA</strong>.
+          </p>
+          <ul class="card-list">
+            <li>❌ Unnoticed cash drawer shortages</li>
+            <li>❌ High risk of statutory tax notice</li>
+            <li>❌ Painful month-end CA data reconciliation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: THE SOLUTION -->
+    <section class="slide" data-slide="3" data-notes="VyaparFlow bridges this gap: It gives the sub-second speed of native desktop, real-time Master PC supervision with instant cashier killswitch, and an automated Indian tax engine that generates GSTR-1 and Tally XML with 1 click.">
+      <div class="slide-eyebrow"><span>🚀</span> 02 | The VyaparFlow Solution</div>
+      <h2 class="slide-title">The Best of Both Worlds: Industrial Speed + Modern Control</h2>
+      <p class="slide-subtitle">A zero-lag architecture engineered to run 24/7 without internet, coupled with real-time multi-counter governance.</p>
+
+      <div class="grid-2">
+        <div class="card emerald-highlight">
+          <span class="card-badge emerald">100% Offline Resilience</span>
+          <div class="card-icon">⚡</div>
+          <h3 class="card-title">Local SQLite ACID Checkout Engine</h3>
+          <p class="card-desc">
+            Bill customers with instantaneous barcode scanning, hotkeys (<span class="key-badge">F2</span>, <span class="key-badge">F8</span>, <span class="key-badge">F9</span>), and automated ESC/POS thermal receipt printing. Operates with zero downtime even during total internet blackouts.
+          </p>
+          <ul class="card-list">
+            <li>✅ Millisecond barcode response</li>
+            <li>✅ Automated drawer kick & thermal cutter spool</li>
+            <li>✅ Multi-counter LAN sync across billing terminals</li>
+          </ul>
+        </div>
+
+        <div class="card highlight">
+          <span class="card-badge">Real-Time Security</span>
+          <div class="card-icon">🛡️</div>
+          <h3 class="card-title">Master PC Live Cashier Governance</h3>
+          <p class="card-desc">
+            The owner's laptop/PC acts as the central command node. A 30-second live heartbeat reveals who is billing, while an instant killswitch allows 1-click suspension of rogue staff.
+          </p>
+          <ul class="card-list">
+            <li>✅ Live counter status pills (Active vs Inactive)</li>
+            <li>✅ Blind shift cash closing with auto variance detection</li>
+            <li>✅ Immediate HTTP 403 staff lockout</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 20px; padding: 20px; background: #FFFFFF; border-left: 5px solid #059669;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <h4 style="font-size: 16px; font-weight: 800; color: #0F172A;">📊 Zero-Friction Accountant Workflow</h4>
+            <p style="font-size: 13.5px; color: #64748B; margin-top: 4px;">VyaparFlow generates CA-ready GSTR-1 tables (B2B, B2CS, HSN) and customized Tally Prime XML with mapped ledgers.</p>
+          </div>
+          <span class="card-badge emerald">Tally Prime Ready</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: 8-IN-1 VERTICAL ENGINE (INTERACTIVE ANIMATED DEMO) -->
+    <section class="slide" data-slide="4" data-notes="Instead of building 8 separate apps, we built a single chameleon engine. Watch this: when I click 'Wine Shop', the units morph into bottles and cases. When I click 'Pharmacy', it tracks batch numbers and salt names. One software sells across 8 multi-billion dollar verticals!">
+      <div class="slide-eyebrow"><span>🔄</span> 03 | Adaptive Architecture</div>
+      <h2 class="slide-title">8-in-1 Vertical Morphing: One Engine, Unlimited Markets</h2>
+      <p class="slide-subtitle">Click below to see the UI and inventory engine morph in real time for each business vertical:</p>
+
+      <!-- Interactive Vertical Tabs -->
+      <div class="vertical-tabs">
+        <button class="vertical-tab-btn active" onclick="switchVertical('supermarket')">🛒 Supermarket & Kirana</button>
+        <button class="vertical-tab-btn" onclick="switchVertical('liquor')">🍾 Liquor & Wine Shop</button>
+        <button class="vertical-tab-btn" onclick="switchVertical('pharmacy')">💊 Pharmacy & Chemist</button>
+        <button class="vertical-tab-btn" onclick="switchVertical('restaurant')">🍽️ Restaurant & Cafe</button>
+        <button class="vertical-tab-btn" onclick="switchVertical('apparel')">👕 Apparel & Footwear</button>
+        <button class="vertical-tab-btn" onclick="switchVertical('electronics')">💻 Electronics & Mobile</button>
+      </div>
+
+      <div class="grid-2">
+        <div class="card highlight" id="verticalInfoCard">
+          <span class="card-badge emerald" id="vBadge">Supermarket Mode</span>
+          <div class="card-icon" id="vIcon">🛒</div>
+          <h3 class="card-title" id="vTitle">Supermarket & Kirana Retail</h3>
+          <p class="card-desc" id="vDesc">
+            Optimized for high-volume grocery counters. Supports loose weigh-scale items, MRP vs selling price discounts, multi-pack bundles, and rapid barcode checkout.
+          </p>
+          <ul class="card-list" id="vList">
+            <li>✅ Units: KG, Gram, Pack, Dozen, Carton</li>
+            <li>✅ Barcode scale integration & instant item weight calc</li>
+            <li>✅ Customer Khata ledger with WhatsApp payment reminders</li>
+          </ul>
+        </div>
+
+        <!-- Live Morphing Screen Simulator -->
+        <div class="vertical-preview-card" id="vPreviewCard">
+          <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed #334155; padding-bottom: 10px; margin-bottom: 12px;">
+            <span style="color: #10B981; font-weight: 700;" id="vSimHeader">TERMINAL: KIRANA EXPRESS LANE 01</span>
+            <span style="color: #94A3B8;">STATUS: READY</span>
+          </div>
+          <div style="line-height: 1.8;" id="vSimContent">
+            <div>&gt; BARCODE SCAN: 8901030383829 (Tata Tea Gold 500g)</div>
+            <div>&gt; UNIT: PACK [QTY: 2] | MRP: ₹310 | SELL: ₹285</div>
+            <div>&gt; TAX: CGST 2.5% + SGST 2.5% (HSN: 0902)</div>
+            <div>&gt; INVENTORY REMAINING: 48 PACKS</div>
+            <div style="color: #38BDF8; margin-top: 10px;">✔ INSTANT TOTAL: ₹570.00 (SAVINGS: ₹50.00)</div>
+          </div>
+          <div style="margin-top: 16px; border-top: 1px dashed #334155; padding-top: 10px; display: flex; justify-content: space-between; color: #94A3B8;">
+            <span>HOTKEY: [F9] PRINT RECEIPT</span>
+            <span style="color: #10B981;">0ms DELAY</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: STATUTORY & LEGAL SHIELD -->
+    <section class="slide" data-slide="5" data-notes="Merchants love this slide because it protects them from income tax notices. Under Section 269ST, accepting more than ₹2 Lakh cash brings a 100% fine. VyaparFlow automatically halts billing and enforces digital payments. Plus it prints CGST Rule 46 itemized bills and outputs 1-click GSTR-1 CSV.">
+      <div class="slide-eyebrow"><span>🛡️</span> 04 | Statutory & Legal Compliance</div>
+      <h2 class="slide-title">Built-in Legal Shield: Zero Penalties, 100% Tax Accuracy</h2>
+      <p class="slide-subtitle">Automating complex Indian tax statutes so retail owners can sleep peacefully without fear of audits.</p>
+
+      <div class="grid-3">
+        <div class="card highlight">
+          <span class="card-badge rose">100% Penalty Shield</span>
+          <div class="card-icon">🛑</div>
+          <h3 class="card-title">Income Tax Section 269ST Guard</h3>
+          <p class="card-desc">
+            Receiving &ge;₹2,00,000 cash in a single day attracts an equal 100% penalty under <strong>Section 271DA</strong>. VyaparFlow instantly blocks cash transactions at ₹1,99,999 and enforces NEFT/UPI.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="card-badge emerald">Audit Compliant</span>
+          <div class="card-icon">🧾</div>
+          <h3 class="card-title">CGST Rule 46 Itemized Tax Table</h3>
+          <p class="card-desc">
+            Thermal and A4 invoices clearly display the statutory dual tax grid (Rate %, Taxable Value, CGST, SGST, Cess, Total Tax) with Buyer GSTIN for B2B input tax credit claims.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="card-badge amber">CA-Ready</span>
+          <div class="card-icon">📑</div>
+          <h3 class="card-title">1-Click GSTR-1 & Tally XML Export</h3>
+          <p class="card-desc">
+            Automatically packages monthly sales into Table 7 (B2CS), Table 12 (HSN Summary), and Table 4A (B2B Invoices). Drops clean XML into Tally Prime with zero mismatch.
+          </p>
+        </div>
+      </div>
+
+      <div class="metric-row">
+        <div class="metric-box">
+          <div class="metric-value rose" data-count="200000" data-prefix="₹">0</div>
+          <div class="metric-label">Sec 269ST Cash Limit Guard</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-value emerald" data-count="100" data-suffix="%">0</div>
+          <div class="metric-label">Rule 46 Tax Accuracy</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-value" data-count="1" data-suffix=" Click">0</div>
+          <div class="metric-label">GSTR-1 CSV Extraction</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-value amber" data-count="0" data-suffix=" Errors">0</div>
+          <div class="metric-label">Tally Ledger Mismatches</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: MASTER PC & ANTI-THEFT -->
+    <section class="slide" data-slide="6" data-notes="Counter leakage is the biggest headache for owners. VyaparFlow sends a live 30-second heartbeat from each counter. If an owner suspects cashier fraud, he can click one button to instantly revoke their JWT token with an HTTP 403 kickout. Plus blind cash closing catches note shortages automatically.">
+      <div class="slide-eyebrow"><span>📡</span> 05 | Cashier Command & Loss Prevention</div>
+      <h2 class="slide-title">Master PC Central Command: Eliminating Counter Theft</h2>
+      <p class="slide-subtitle">Empowering business owners with real-time cashier supervision, blind audits, and immediate security intervention.</p>
+
+      <div class="grid-3">
+        <div class="card highlight">
+          <span class="card-badge emerald">
+            <span class="radar-container"><span class="radar-dot"></span><span class="radar-wave"></span></span>
+            Live 30s Heartbeat
+          </span>
+          <div class="card-icon">🖥️</div>
+          <h3 class="card-title">Real-Time Counter Monitoring</h3>
+          <p class="card-desc">
+            Every billing terminal sends an automated background heartbeat ping every 30 seconds. The owner's screen displays green active indicators with cashier names and lane IDs.
+          </p>
+          <ul class="card-list">
+            <li>✅ Multi-machine LAN discovery</li>
+            <li>✅ Zero manual refreshing needed</li>
+            <li>✅ Instant notification on lane drop</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="card-badge rose">1-Click Lockout</span>
+          <div class="card-icon">🔒</div>
+          <h3 class="card-title">Instant Security Killswitch</h3>
+          <p class="card-desc">
+            Owner can revoke any cashier's access with 1 click. Terminals instantly receive <code>HTTP 403 Forbidden</code>, terminate the session, and lock the drawer.
+          </p>
+          <div style="margin-top: 14px;">
+            <button class="btn-nav" style="border-color: #E11D48; color: #E11D48; font-size: 12px;" onclick="simulateKillswitch()">
+              ⚡ Test Killswitch Simulation
+            </button>
+            <div id="killswitchMsg" style="font-size: 11.5px; color: #E11D48; margin-top: 6px; font-weight: 700; display: none;">
+              [ALERT 403] Cashier Counter_02 revoked & session terminated!
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="card-badge amber">Zero Leakage</span>
+          <div class="card-icon">💰</div>
+          <h3 class="card-title">Blind Shift Cash Closing</h3>
+          <p class="card-desc">
+            Cashier cannot see expected sales drawer total. They must count and enter physical notes (₹500, ₹200, ₹100...). The system logs variances permanently in the audit trail.
+          </p>
+          <ul class="card-list">
+            <li>✅ Eliminates counter cash skimming</li>
+            <li>✅ Denomination-level breakdown</li>
+            <li>✅ Tamper-proof manager signature</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: BUSINESS MODEL & MONETIZATION -->
+    <section class="slide" data-slide="7" data-notes="Here is how we monetize. Traditional merchants hate recurring rent, so we offer a Perpetual License for ₹9,999 with ₹2,499 AMC. For modern chains, we have ₹5,999/year SaaS. And our turnkey bundle with printer and scanner sells at ₹24,999 with 40% gross margins.">
+      <div class="slide-eyebrow"><span>💼</span> 06 | Business Economics</div>
+      <h2 class="slide-title">Monetization Architecture: Capturing Maximum Merchant Value</h2>
+      <p class="slide-subtitle">A flexible pricing model combining upfront cashflow, compounding annual SaaS, and lucrative hardware margins.</p>
+
+      <div class="grid-3">
+        <div class="card highlight">
+          <span class="card-badge emerald">Merchant Favorite</span>
+          <div class="card-icon">📦</div>
+          <h3 class="card-title">Tier 1: Perpetual License</h3>
+          <div class="metric-value emerald" style="font-size: 32px; margin: 10px 0;" data-count="9999" data-prefix="₹">₹9,999</div>
+          <p class="card-desc">
+            One-time software setup for 1 Master Terminal. Removes merchant subscription anxiety. Includes <strong>₹2,499/year Annual Maintenance Contract (AMC)</strong> for GST updates and support.
+          </p>
+          <ul class="card-list">
+            <li>✅ Massive upfront cash generation</li>
+            <li>✅ 70%+ renewal on AMC contracts</li>
+            <li>✅ Zero churn from credit card payment failures</li>
+          </ul>
+        </div>
+
+        <div class="card highlight">
+          <span class="card-badge">Predictable MRR</span>
+          <div class="card-icon">🚀</div>
+          <h3 class="card-title">Tier 2: Annual SaaS Model</h3>
+          <div class="metric-value" style="font-size: 32px; margin: 10px 0;" data-count="5999" data-prefix="₹">₹5,999</div>
+          <p class="card-desc">
+            ₹5,999 / year per store (just ₹499/month). Includes automated data backups, phone support, and regular feature updates.
+          </p>
+          <ul class="card-list">
+            <li>✅ Auxiliary counters at ₹1,999/year</li>
+            <li>✅ Compounding annual recurring revenue</li>
+            <li>✅ Ideal for multi-store supermarket chains</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="card-badge amber">High Margin</span>
+          <div class="card-icon">🖨️</div>
+          <h3 class="card-title">Tier 3: Turnkey Hardware Pack</h3>
+          <div class="metric-value amber" style="font-size: 32px; margin: 10px 0;" data-count="24999" data-prefix="₹">₹24,999</div>
+          <p class="card-desc">
+            Complete retail box: VyaparFlow software + 80mm High-Speed Thermal Printer + 2D USB Barcode Scanner.
+          </p>
+          <ul class="card-list">
+            <li>✅ 35-40% hardware supplier margin</li>
+            <li>✅ Turnkey plug-and-play setup for shopkeepers</li>
+            <li>✅ Zero competitor interference</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: COMPETITIVE MOAT -->
+    <section class="slide" data-slide="8" data-notes="Compared to Marg and Tally, our UI is modern and requires 5 minutes of training. Compared to Vyapar and Khatabook, we don't freeze on internet lag and handle 100,000 SKUs. Compared to Petpooja, we are universal across 8 verticals at 70% lower TCO.">
+      <div class="slide-eyebrow"><span>⚔️</span> 07 | Competitive Moat</div>
+      <h2 class="slide-title">Why VyaparFlow Wins: Built for the Indian Ground Reality</h2>
+      <p class="slide-subtitle">Clear positioning that solves the fatal flaws of both desktop incumbents and cloud startups.</p>
+
+      <div class="grid-3">
+        <div class="card">
+          <span class="card-badge">vs. Marg / Tally</span>
+          <div class="card-icon">🆚</div>
+          <h3 class="card-title">Legacy Desktop ERPs</h3>
+          <p class="card-desc">
+            Tally and Marg are accountant software masquerading as billing systems. They require complex F12 menus and weeks of training.
+          </p>
+          <ul class="card-list">
+            <li>✨ <strong>VyaparFlow</strong>: 5-minute cashier onboarding</li>
+            <li>✨ Built-in automatic thermal driver spooling</li>
+            <li>✨ Feeds Tally Prime directly via XML export</li>
+          </ul>
+        </div>
+
+        <div class="card highlight">
+          <span class="card-badge emerald">vs. Mobile Apps</span>
+          <div class="card-icon">🆚</div>
+          <h3 class="card-title">Vyapar / Khatabook</h3>
+          <p class="card-desc">
+            Mobile-centric cloud apps slow down when catalog exceeds 1,000 items and freeze when store WiFi drops.
+          </p>
+          <ul class="card-list">
+            <li>✨ <strong>VyaparFlow</strong>: Handles 100,000+ SKUs with zero lag</li>
+            <li>✨ True multi-counter master-slave LAN sync</li>
+            <li>✨ Full keyboard billing speed (1 bill every 8 sec)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="card-badge amber">vs. Enterprise Cloud</span>
+          <div class="card-icon">🆚</div>
+          <h3 class="card-title">Petpooja / POSist</h3>
+          <p class="card-desc">
+            Niche-locked strictly into restaurants, charging heavy yearly fees with zero offline flexibility for general retail.
+          </p>
+          <ul class="card-list">
+            <li>✨ <strong>VyaparFlow</strong>: Single universal 8-in-1 engine</li>
+            <li>✨ 70% lower total cost of ownership</li>
+            <li>✨ Zero commission cuts on merchant sales</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 9: FACTORY READY & EXECUTION -->
+    <section class="slide" data-slide="9" data-notes="This isn't just an idea or a Figma prototype. It is fully engineered and packaged. The installer is exactly 86.37 MB. All test data has been cleanly purged so new installs launch straight into the First-Time Setup Wizard. All automated unit and integration tests pass.">
+      <div class="slide-eyebrow"><span>📦</span> 08 | Production Readiness</div>
+      <h2 class="slide-title">Factory-Engineered: 100% Tested & Ready to Ship Today</h2>
+      <p class="slide-subtitle">Not a prototype. A complete, packaged commercial installer verified with automated test suites.</p>
+
+      <div class="grid-2">
+        <div class="card highlight">
+          <span class="card-badge emerald">86.37 MB Installer</span>
+          <div class="card-icon">💿</div>
+          <h3 class="card-title">Standalone NSIS Windows Executable</h3>
+          <p class="card-desc">
+            Self-contained binary (<code>VyaparFlow_POS_Setup_1.0.0.exe</code>) bundling Node runtime, React production bundle, and SQLite engine. Installs with 1 click on any standard Windows 10/11 PC.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="card-badge emerald">100% Factory Clean</span>
+          <div class="card-icon">🧹</div>
+          <h3 class="card-title">Database Sanitization & Onboarding</h3>
+          <p class="card-desc">
+            All sample test orders, expenses, and credentials purged. First launch automatically triggers the interactive <strong>First-Time Store Setup Wizard</strong> for instant merchant personalization.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="card-badge">Zero Defect Verification</span>
+          <div class="card-icon">🧪</div>
+          <h3 class="card-title">Automated Verification Passing</h3>
+          <p class="card-desc">
+            Passing test scripts for JWT session validation, 30-second heartbeat synchronization, HTTP 403 killswitch blocking, GSTR-1 CSV extraction, and Tally XML generation.
+          </p>
+        </div>
+
+        <div class="card emerald-highlight">
+          <span class="card-badge emerald">Ready for Ground Pilots</span>
+          <div class="card-icon">🤝</div>
+          <h3 class="card-title">Immediate Milestone: 10-Store Pilot</h3>
+          <p class="card-desc">
+            Targeting immediate deployment across 10-20 local merchant partners to gather on-ground operational metrics, cashier feedback, and validate sales conversion.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 10: THE ASK & MENTOR STRATEGY -->
+    <section class="slide" data-slide="10" data-notes="Bhaiya, the software is 100% built and working. I am seeking your experienced mentorship on three critical pillars: 1) How to structure distribution commissions for computer dealers and CAs, 2) Rolling out our 10-store local pilot, and 3) Incorporating the company entity. Your guidance will turn this code into a real company.">
+      <div class="slide-eyebrow"><span>🎯</span> 09 | The Vision Ahead</div>
+      <h2 class="slide-title">The Ask: Strategic Guidance to Build a Scalable Enterprise</h2>
+      <p class="slide-subtitle">Three key areas where your experience will accelerate VyaparFlow from software into an established brand:</p>
+
+      <div class="grid-3">
+        <div class="card highlight">
+          <div class="card-icon">🎯</div>
+          <h3 class="card-title">1. Channel GTM & Reseller Deals</h3>
+          <p class="card-desc">
+            Structuring revenue shares for local computer dealers, hardware vendors (thermal printers/scanners), and CA networks to build an affiliate distribution army across Tier-2/3 cities.
+          </p>
+        </div>
+
+        <div class="card highlight">
+          <div class="card-icon">💼</div>
+          <h3 class="card-title">2. Pilot Rollout & Pricing Mix</h3>
+          <p class="card-desc">
+            Executing our initial 10-store pilot in local markets. Balancing upfront Perpetual Licensing (₹9,999) vs SaaS (₹5,999/yr) to maximize rapid merchant adoption and cash generation.
+          </p>
+        </div>
+
+        <div class="card highlight">
+          <div class="card-icon">🏢</div>
+          <h3 class="card-title">3. Entity Formation & IP Shield</h3>
+          <p class="card-desc">
+            Guidance on corporate structuring (Pvt Ltd vs LLP), trademarking the VyaparFlow brand, and establishing professional customer onboarding workflows.
+          </p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 24px; padding: 24px; background: #0F172A; color: white; border: none; border-radius: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <h4 style="font-size: 20px; font-weight: 800; color: white; margin-bottom: 4px;">Thank You, Bhaiya! Looking Forward to Your Guidance</h4>
+            <div style="font-size: 13.5px; color: #94A3B8;">VyaparFlow Technologies | Confidential Presentation & Demo</div>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn-nav" style="background: #2563EB; color: white; border: none;" onclick="goToSlide(1)">
+              ↺ Restart Deck
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Presenter Notes Drawer (Toggled by 'N' or Script Button) -->
+  <div class="notes-drawer" id="notesDrawer">
+    <div class="notes-header">
+      <div class="notes-title">🎙️ Presenter Script & Talking Points (For Your Mentor Pitch)</div>
+      <button onclick="toggleNotes()" style="background: transparent; border: none; color: #94A3B8; cursor: pointer; font-size: 16px;">✕</button>
+    </div>
+    <div class="notes-content" id="notesContent">
+      Loading talking points...
+    </div>
+  </div>
+
+  <!-- Grid View Modal (Toggled by 'G' or Grid Button) -->
+  <div class="grid-drawer" id="gridDrawer">
+    <button class="grid-drawer-close" onclick="toggleGrid()">✕ Close Grid [ESC]</button>
+    <h2 style="color: white; font-size: 24px; margin-bottom: 8px; text-align: center;">All Presentation Slides</h2>
+    <p style="color: #94A3B8; text-align: center; margin-bottom: 24px;">Click any slide card to jump instantly:</p>
+    <div class="thumbnails-grid" id="thumbnailsGrid">
+      <!-- Generated via JavaScript -->
+    </div>
+  </div>
+
+  <!-- Bottom Navigation Guide -->
+  <footer class="deck-footer-hint">
+    <span>Navigate: <span class="key-badge">←</span> <span class="key-badge">→</span> or <span class="key-badge">Space</span></span>
+    <span>•</span>
+    <span>Fullscreen: <span class="key-badge">F</span></span>
+    <span>•</span>
+    <span>Talking Script: <span class="key-badge">N</span></span>
+    <span>•</span>
+    <span>All Slides Grid: <span class="key-badge">G</span></span>
+    <span>•</span>
+    <span>Auto-Play: <span class="key-badge">A</span></span>
+  </footer>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 10;
+    let autoPlayInterval = null;
+    let soundEnabled = true;
+
+    // Slide Titles for Grid
+    const slideMeta = [
+      { num: 1, title: "Cover & Vision" },
+      { num: 2, title: "The Retail Problem" },
+      { num: 3, title: "The VyaparFlow Solution" },
+      { num: 4, title: "8-in-1 Adaptive Engine" },
+      { num: 5, title: "Statutory & Legal Shield" },
+      { num: 6, title: "Master PC & Anti-Theft" },
+      { num: 7, title: "Monetization & Economics" },
+      { num: 8, title: "Competitive Moat" },
+      { num: 9, title: "Production Readiness" },
+      { num: 10, title: "The Mentor Ask" }
+    ];
+
+    // Build Thumbnail Grid
+    const gridContainer = document.getElementById('thumbnailsGrid');
+    slideMeta.forEach(s => {
+      const item = document.createElement('div');
+      item.className = `thumb-item ${s.num === 1 ? 'active' : ''}`;
+      item.id = `thumb-${s.num}`;
+      item.onclick = () => { goToSlide(s.num); toggleGrid(); };
+      item.innerHTML = `
+        <div class="thumb-num">SLIDE ${String(s.num).padStart(2, '0')}</div>
+        <div class="thumb-title">${s.title}</div>
+      `;
+      gridContainer.appendChild(item);
+    });
+
+    // Sound FX generator (Web Audio API)
+    function playTick() {
+      if (!soundEnabled) return;
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(580, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(840, audioCtx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.09);
+      } catch (e) {}
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById('soundStatus').textContent = soundEnabled ? 'On' : 'Off';
+      document.getElementById('soundBtn').classList.toggle('active', soundEnabled);
+    }
+
+    function showSlide(n) {
+      if (n > totalSlides) currentSlide = 1;
+      else if (n < 1) currentSlide = totalSlides;
+      else currentSlide = n;
+
+      // Update slide elements
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      const activeSlide = document.querySelector(`.slide[data-slide="${currentSlide}"]`);
+      if (activeSlide) {
+        activeSlide.classList.add('active');
+        // Update Notes
+        const notes = activeSlide.getAttribute('data-notes') || 'No notes for this slide.';
+        document.getElementById('notesContent').textContent = notes;
+      }
+
+      // Progress bar
+      const progressPercent = (currentSlide / totalSlides) * 100;
+      document.getElementById('progressBar').style.width = `${progressPercent}%`;
+
+      // Indicator
+      document.getElementById('slideNum').textContent = 
+        `${String(currentSlide).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}`;
+
+      // Update thumbnail active states
+      document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
+      const currentThumb = document.getElementById(`thumb-${currentSlide}`);
+      if (currentThumb) currentThumb.classList.add('active');
+
+      // Trigger animated counters on active slide
+      animateCounters(activeSlide);
+
+      // Play subtle tick
+      playTick();
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function nextSlide() { showSlide(currentSlide + 1); }
+    function prevSlide() { showSlide(currentSlide - 1); }
+    function goToSlide(n) { showSlide(n); }
+
+    // Number Counter Animation
+    function animateCounters(slideElem) {
+      if (!slideElem) return;
+      const counters = slideElem.querySelectorAll('[data-count]');
+      counters.forEach(counter => {
+        const target = parseFloat(counter.getAttribute('data-count'));
+        const prefix = counter.getAttribute('data-prefix') || '';
+        const suffix = counter.getAttribute('data-suffix') || '';
+        const isDecimal = target % 1 !== 0;
+        const duration = 800; // ms
+        const startTime = performance.now();
+
+        function updateNumber(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease-out cubic
+          const easeOut = 1 - Math.pow(1 - progress, 3);
+          const currentVal = target * easeOut;
+
+          if (isDecimal) {
+            counter.textContent = `${prefix}${currentVal.toFixed(2)}${suffix}`;
+          } else if (target >= 1000) {
+            counter.textContent = `${prefix}${Math.round(currentVal).toLocaleString('en-IN')}${suffix}`;
+          } else {
+            counter.textContent = `${prefix}${Math.round(currentVal)}${suffix}`;
+          }
+
+          if (progress < 1) {
+            requestAnimationFrame(updateNumber);
+          }
+        }
+        requestAnimationFrame(updateNumber);
+      });
+    }
+
+    // Auto Play Toggle
+    function toggleAutoPlay() {
+      const btn = document.getElementById('autoplayBtn');
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
+        btn.textContent = '▶ Auto Play [A]';
+        btn.classList.remove('active');
+      } else {
+        btn.textContent = '⏸ Pause [A]';
+        btn.classList.add('active');
+        autoPlayInterval = setInterval(() => {
+          nextSlide();
+        }, 8000); // 8 seconds per slide
+      }
+    }
+
+    // Notes Toggle
+    function toggleNotes() {
+      const drawer = document.getElementById('notesDrawer');
+      const btn = document.getElementById('notesBtn');
+      drawer.classList.toggle('open');
+      btn.classList.toggle('active');
+    }
+
+    // Grid Toggle
+    function toggleGrid() {
+      const drawer = document.getElementById('gridDrawer');
+      drawer.classList.toggle('open');
+    }
+
+    // Fullscreen Toggle
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // Interactive Vertical Engine Morphing Logic
+    const verticalData = {
+      supermarket: {
+        badge: 'Supermarket Mode',
+        icon: '🛒',
+        title: 'Supermarket & Kirana Retail',
+        desc: 'Optimized for high-volume grocery counters. Supports loose weigh-scale items, MRP vs selling price discounts, multi-pack bundles, and rapid barcode checkout.',
+        list: [
+          '✅ Units: KG, Gram, Pack, Dozen, Carton',
+          '✅ Barcode scale integration & instant item weight calc',
+          '✅ Customer Khata ledger with WhatsApp payment reminders'
+        ],
+        simHeader: 'TERMINAL: KIRANA EXPRESS LANE 01',
+        simContent: `
+          <div>&gt; BARCODE SCAN: 8901030383829 (Tata Tea Gold 500g)</div>
+          <div>&gt; UNIT: PACK [QTY: 2] | MRP: ₹310 | SELL: ₹285</div>
+          <div>&gt; TAX: CGST 2.5% + SGST 2.5% (HSN: 0902)</div>
+          <div>&gt; INVENTORY REMAINING: 48 PACKS</div>
+          <div style="color: #38BDF8; margin-top: 10px;">✔ INSTANT TOTAL: ₹570.00 (SAVINGS: ₹50.00)</div>
+        `
+      },
+      liquor: {
+        badge: 'Liquor & Wine Mode',
+        icon: '🍾',
+        title: 'Wine & Beer Retail Counter',
+        desc: 'Built specifically for high-speed liquor vends with state excise compliance, multi-pack pricing (Nip, Pint, Quarts), and rapid rush-hour clearance.',
+        list: [
+          '✅ Units: 750ml (Bottle), 375ml (Pint), 180ml (Nip), Can, Case',
+          '✅ Excise Daily Brand-wise Sales Register',
+          '✅ Sub-second bottle barcode verification'
+        ],
+        simHeader: 'TERMINAL: WINE SHOP COUNTER 01',
+        simContent: `
+          <div>&gt; BARCODE SCAN: 8901522001149 (Royal Challenge 750ml)</div>
+          <div>&gt; SIZE: 750ml BOTTLE [QTY: 1] | PRICE: ₹780.00</div>
+          <div>&gt; EXCISE CODE: FL-0492 | BATCH: 2026-B9</div>
+          <div>&gt; CASH DRAWER: OPEN COMMAND SENT</div>
+          <div style="color: #34D399; margin-top: 10px;">✔ SALE RECORDED (TOTAL TIME: 1.2s)</div>
+        `
+      },
+      pharmacy: {
+        badge: 'Pharmacy / Chemist Mode',
+        icon: '💊',
+        title: 'Pharmacy & Medical Stores',
+        desc: 'Complete drug compliance with Batch numbers, Expiry Date alerts, Doctor prescription tags, and generic Salt name substitution search.',
+        list: [
+          '✅ Units: Strip, Tablet, Bottle, Box, Vial',
+          '✅ Near-expiry alert badges (30 / 60 / 90 days)',
+          '✅ Schedule H1 & Narcotic register logging'
+        ],
+        simHeader: 'TERMINAL: MEDPLUS DISPENSARY',
+        simContent: `
+          <div>&gt; ITEM: Augmentin 625 Duo (Amoxycillin + Clavulanic)</div>
+          <div>&gt; BATCH: AG-9921 | EXP: 11/2027 | STRIP OF 10 TAB</div>
+          <div>&gt; DOCTOR: Dr. R. Verma | PATIENT: Amit Sharma</div>
+          <div>&gt; SCHEDULE H1 LOGGED IN DRUG REGISTER</div>
+          <div style="color: #FBBF24; margin-top: 10px;">✔ PRESCRIPTION ATTACHED & TAX INVOICED</div>
+        `
+      },
+      restaurant: {
+        badge: 'Restaurant Mode',
+        icon: '🍽️',
+        title: 'Restaurant, Cafe & Quick Service',
+        desc: 'Dine-in table layouts, Captain ordering, Kitchen Order Tickets (KOT) thermal routing, and bill split calculation.',
+        list: [
+          '✅ Units: Plate, Portion, Half, Full, Glass',
+          '✅ KOT auto-print directly to kitchen printer',
+          '✅ Table occupancy & split-bill payment'
+        ],
+        simHeader: 'TERMINAL: CAFE DINING ROOM - TABLE 04',
+        simContent: `
+          <div>&gt; TABLE: T-04 [COVERS: 4 GUESTS]</div>
+          <div>&gt; KOT #104 SENT TO KITCHEN THERMAL PRINTER</div>
+          <div>&gt; ITEMS: 2x Paneer Butter Masala (Full), 4x Butter Naan</div>
+          <div>&gt; GST: 5% RESTAURANT SERVICE (HSN 9963)</div>
+          <div style="color: #A7F3D0; margin-top: 10px;">✔ BILL READY FOR CHECKOUT: ₹840.00</div>
+        `
+      },
+      apparel: {
+        badge: 'Apparel Mode',
+        icon: '👕',
+        title: 'Apparel & Footwear Boutique',
+        desc: 'Size, Color, and Fit matrix matrices with custom barcode hang-tag thermal printing and seasonal discount schemes.',
+        list: [
+          '✅ Units: Piece, Set, Pair',
+          '✅ Size Matrix: S, M, L, XL, XXL / Color variations',
+          '✅ Barcode barcode sticker label printer support'
+        ],
+        simHeader: 'TERMINAL: FASHION TRENDS LANE 02',
+        simContent: `
+          <div>&gt; ITEM: Slim-Fit Cotton Shirt [NAVY BLUE - SIZE 42]</div>
+          <div>&gt; BARCODE: AP-42-NV-901 | HSN: 6205</div>
+          <div>&gt; PROMO: BUY 2 GET 10% OFF APPLIED</div>
+          <div>&gt; CUSTOMER KHATA REWARD: +45 POINTS</div>
+          <div style="color: #38BDF8; margin-top: 10px;">✔ INVOICE PRINTED WITH RETURN POLICY FOOTER</div>
+        `
+      },
+      electronics: {
+        badge: 'Electronics Mode',
+        icon: '💻',
+        title: 'Electronics & Mobile Retail',
+        desc: 'Serial number and IMEI hardware tracking, brand warranty card generation, and buyback exchange calculations.',
+        list: [
+          '✅ Units: Unit, Box, Kit',
+          '✅ IMEI / Serial Number scan verification',
+          '✅ Manufacturer brand warranty slip attachment'
+        ],
+        simHeader: 'TERMINAL: DIGITAL HUB MOBILE COUNTER',
+        simContent: `
+          <div>&gt; ITEM: Samsung Galaxy M14 5G (128GB Blue)</div>
+          <div>&gt; IMEI 1: 869201948201924 | IMEI 2: 869201948201925</div>
+          <div>&gt; 1 YEAR BRAND WARRANTY REGISTERED</div>
+          <div>&gt; B2B INVOICE: GSTIN 07AAAAA0000A1Z5 CLAIMABLE</div>
+          <div style="color: #34D399; margin-top: 10px;">✔ SERIAL LOGGED FOR WARRANTY SERVICE</div>
+        `
+      }
+    };
+
+    function switchVertical(key) {
+      // Update tab buttons
+      document.querySelectorAll('.vertical-tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const data = verticalData[key];
+      if (!data) return;
+
+      // Animate card switch
+      const card = document.getElementById('verticalInfoCard');
+      const preview = document.getElementById('vPreviewCard');
+      card.style.transform = 'scale(0.97)';
+      preview.style.transform = 'scale(0.97)';
+
+      setTimeout(() => {
+        document.getElementById('vBadge').textContent = data.badge;
+        document.getElementById('vIcon').textContent = data.icon;
+        document.getElementById('vTitle').textContent = data.title;
+        document.getElementById('vDesc').textContent = data.desc;
+        
+        const list = document.getElementById('vList');
+        list.innerHTML = '';
+        data.list.forEach(liText => {
+          const li = document.createElement('li');
+          li.textContent = liText;
+          list.appendChild(li);
+        });
+
+        document.getElementById('vSimHeader').textContent = data.simHeader;
+        document.getElementById('vSimContent').innerHTML = data.simContent;
+
+        card.style.transform = 'scale(1)';
+        preview.style.transform = 'scale(1)';
+        playTick();
+      }, 150);
+    }
+
+    // Killswitch Simulation
+    function simulateKillswitch() {
+      const msg = document.getElementById('killswitchMsg');
+      msg.style.display = 'block';
+      msg.style.animation = 'fadeIn 0.3s ease';
+      playTick();
+      setTimeout(() => {
+        msg.style.display = 'none';
+      }, 4000);
+    }
+
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (document.getElementById('gridDrawer').classList.contains('open')) {
+        if (e.key === 'Escape') toggleGrid();
+        return;
+      }
+      if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullScreen();
+      } else if (e.key === 'n' || e.key === 'N') {
+        toggleNotes();
+      } else if (e.key === 'g' || e.key === 'G') {
+        toggleGrid();
+      } else if (e.key === 'a' || e.key === 'A') {
+        toggleAutoPlay();
+      } else if (e.key === 'Home') {
+        goToSlide(1);
+      } else if (e.key === 'End') {
+        goToSlide(totalSlides);
+      }
+    });
+
+    // Initialize first slide on load
+    document.addEventListener('DOMContentLoaded', () => {
+      showSlide(1);
+    });
+  </script>
+</body>
+</html>

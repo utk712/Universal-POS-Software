@@ -1,0 +1,11 @@
+name,barcode,category,unit,cost_price,mrp,selling_price,stock_quantity,tax_rate,hsn_code
+Amul Butter 500g,8901262010053,Dairy & Bakery,pcs,240,275,260,35,12,0405
+Tata Salt 1kg,8904043901005,Grocery,pack,22,28,26,60,0,2501
+Maggi 2-Minute Noodles 280g,8901058852350,Snacks & Munchies,pack,42,50,48,80,12,1902
+Coca-Cola 750ml,8901764012217,Beverages & Drinks,bottle,35,45,42,50,28,2202
+Parle-G Gold Biscuits 1kg,8901719114256,Dairy & Bakery,pack,90,120,110,40,18,1905
+Dettol Original Soap 125g,8901396388011,Personal Care,pcs,45,60,55,75,18,3401
+Fortune Sunlite Sunflower Oil 1L,8906007280014,Grocery,ltr,130,165,152,45,5,1512
+Haldiram's Aloo Bhujia 400g,8904004400509,Snacks & Munchies,pack,85,115,105,50,12,2106
+Colgate MaxFresh Toothpaste 150g,8901314010520,Personal Care,pcs,80,110,99,65,18,3306
+Aashirvaad Shudh Chakki Atta 5kg,8901030383707,Grocery,pack,210,265,248,30,0,1101

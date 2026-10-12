@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Production Builds & Bundles
+build/
+**/build/
+dist/
+**/dist/
+
+# Executables & Installers
+*.exe
+*.msi
+*.dmg
+*.blockmap
+*.zip
+*.tar.gz
+
+# Local Databases & Backups
+backup/
+**/backup/
+backups/
+exports/
+**/exports/
+*.xlsx
+*.xls
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Environment & Logs
+.env
+.env.*
+!.env.example
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor & System Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
